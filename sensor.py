@@ -24,7 +24,7 @@ from homeassistant.const import (
     TEMP_CELSIUS,
     TEMP_FAHRENHEIT,
     TIME_HOURS,
-    UNIT_PERCENTAGE,
+    PERCENTAGE,
     UV_INDEX,
 )
 import homeassistant.helpers.config_validation as cv
@@ -101,11 +101,11 @@ SENSOR_TYPES = {
     ],
     "daily_percip_probability_max": [
         "Daily Max Percipitation",
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
         "mdi:water-percent",
         []
     ],
@@ -161,11 +161,11 @@ SENSOR_TYPES = {
     ],
     "precip_probability": [
         "Precip Probability",
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
         "mdi:water-percent",
         ["currently", "minutely", "hourly", "daily"],
     ],
@@ -241,21 +241,21 @@ SENSOR_TYPES = {
     ],
     "cloud_cover": [
         "Cloud Coverage",
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
         "mdi:weather-partly-cloudy",
         ["currently", "hourly", "daily"],
     ],
     "humidity": [
         "Humidity",
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
-        UNIT_PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
+        PERCENTAGE,
         "mdi:water-percent",
         ["currently", "hourly", "daily"],
     ],
@@ -758,7 +758,7 @@ class DarkSkySensor(Entity):
 
         # Some state data needs to be rounded to whole values or converted to
         # percentages
-        if self.type in ["precip_probability", "cloud_cover", "humidity"]:
+        if self.type in ["precip_probability", "cloud_cover", "humidity", "daily_percip_probability_max"]:
             return round(state * 100, 1)
 
         if self.type in [
@@ -777,6 +777,9 @@ class DarkSkySensor(Entity):
             "pressure",
             "ozone",
             "uvIndex",
+            "daily_temperature_max",
+            "daily_temperature_min",
+            "daily_wind_gust_max",
         ]:
             return round(state, 1)
         return state
