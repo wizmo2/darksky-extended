@@ -213,6 +213,8 @@ class DarkSkyWeather(WeatherEntity):
                     ATTR_FORECAST_PRECIPITATION: calc_precipitation(
                         entry.d.get("precipIntensity"), 1
                     ),
+                    ATTR_FORECAST_WIND_SPEED: entry.d.get("windSpeed"),
+                    ATTR_FORECAST_WIND_BEARING: entry.d.get("windBearing"),
                     ATTR_FORECAST_CONDITION: MAP_CONDITION.get(entry.d.get("icon")),
                 }
                 for entry in self._ds_hourly.data
